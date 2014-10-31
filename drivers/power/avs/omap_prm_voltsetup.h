@@ -1,0 +1,36 @@
+/*
+ * Copyright (C) 2014 Motorola Mobility LLC
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License version 2 as
+ * published by the Free Software Foundation.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ * 02111-1307, USA
+ */
+
+#ifndef _POWER_OMAP_PRM_VOLTSETUP_H
+#define _POWER_OMAP_PRM_VOLTSETUP_H
+
+struct omap_pmic;
+struct omap_vc_channel_info;
+
+#if IS_ENABLED(CONFIG_POWER_TI_HARDWARE_VOLTAGE_CONTROL)
+int omap_prm_voltsetup(struct omap_vc_channel_info *inf, struct omap_pmic *pmic,
+			u32 uv);
+#else
+static inline int omap_prm_voltsetup(struct omap_vc_channel_info *inf,
+					struct omap_pmic *pmic,	u32 uv)
+{
+	return -ENODEV;
+}
+#endif
+
+#endif				/* _POWER_OMAP_PRM_VOLTSETUP_H */
